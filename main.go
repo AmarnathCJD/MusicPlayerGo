@@ -26,11 +26,10 @@ const (
 )
 
 func main() {
-	YoutubeDL("vaaste")
 	http.HandleFunc("/", playerMainFrame)
 	http.HandleFunc(filePrefix, File)
 	http.HandleFunc("/music/search", XD)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":5000", nil)
 }
 
 func playerMainFrame(w http.ResponseWriter, r *http.Request) {
