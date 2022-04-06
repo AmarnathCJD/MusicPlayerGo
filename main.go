@@ -25,11 +25,13 @@ const (
 	root       = "./music"
 )
 
+var PORT = os.Getenv("PORT")
+
 func main() {
 	http.HandleFunc("/", playerMainFrame)
 	http.HandleFunc(filePrefix, File)
 	http.HandleFunc("/music/search", XD)
-	http.ListenAndServe(":5000", nil)
+	http.ListenAndServe(":"+PORT, nil)
 }
 
 func playerMainFrame(w http.ResponseWriter, r *http.Request) {
@@ -94,6 +96,7 @@ func XD(w http.ResponseWriter, r *http.Request) {
 }
 
 func DownloadSong(q string) {
+        YouTubeDL(q)
 	result := SearchVideos(q, 1)
 	Result := result[0]
 	youtube := youtube.Client{}
@@ -144,8 +147,7 @@ func check(err error) {
 func YoutubeDL(query string) bool {
 	wd, _ := os.Getwd()
 	path := filepath.Join(wd, "music")
-	cmd := `yt-dlp ` + query + ` --output "` + path + `/%(title)s.%(ext)s" --default-search "ytsearch" --list-formats`
-	fmt.Println(cmd)
+	cmd := `yt-dlp ` + query + ` --output "` + path + `/%(title)s.%(ext)s" --default-search "ytsearch"`
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
 	proc := exec.Command("bash", "-c", cmd)
