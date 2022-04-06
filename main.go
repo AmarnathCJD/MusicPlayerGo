@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -9,9 +8,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-
-	yt "github.com/SherlockYigit/youtube-go"
-	youtube "github.com/kkdai/youtube/v2"
 )
 
 type FileInfo struct {
@@ -30,7 +26,7 @@ var PORT = os.Getenv("PORT")
 func main() {
 	http.HandleFunc("/", playerMainFrame)
 	http.HandleFunc(filePrefix, File)
-	http.HandleFunc("/music/search", XD)
+	http.HandleFunc("/music/search", DownloadRequest)
 	http.ListenAndServe(":"+PORT, nil)
 }
 
@@ -87,56 +83,11 @@ func serveDir(w http.ResponseWriter, r *http.Request, path string) {
 	}
 }
 
-func XD(w http.ResponseWriter, r *http.Request) {
-	q := r.FormValue("search")
-	fmt.Println(q)
-	DownloadSong(q)
-	fmt.Println("Downloaded")
+func DownloadRequest(w http.ResponseWriter, r *http.Request) {
+	query := r.FormValue("search")
+	err := YoutubeDL(query)
+        check(err)
 	w.WriteHeader(http.StatusOK)
-}
-
-func DownloadSong(q string) {
-        YoutubeDL(q)
-        return
-	result := SearchVideos(q, 1)
-	Result := result[0]
-	youtube := youtube.Client{}
-	video, err := youtube.GetVideo("https://www.youtube.com/watch?v=" + Result.ID)
-	check(err)
-	stream, _, err := youtube.GetStream(video, video.Formats.FindByQuality("tiny"))
-	check(err)
-	defer stream.Close()
-	outFile, err := os.Create(root + "/song.mp3")
-	check(err)
-	defer outFile.Close()
-	io.Copy(outFile, stream)
-
-}
-
-func SearchVideos(q string, limit int) []YoutubeVideo {
-	vids := yt.Search(q, yt.SearchOptions{
-		Limit: limit,
-		Type:  "video",
-	})
-	var results = make([]YoutubeVideo, limit)
-	for i, v := range vids {
-		results[i] = YoutubeVideo{
-			ID:        v.Video.Id,
-			Title:     v.Title,
-			URL:       v.Video.Url,
-			Thumbnail: v.Video.Thumbnail.Url,
-			Channel:   v.Channel.Name,
-		}
-	}
-	return results
-}
-
-type YoutubeVideo struct {
-	ID        string `json:"id"`
-	URL       string `json:"url"`
-	Title     string `json:"title"`
-	Thumbnail string `json:"thumbnail"`
-	Channel   string `json:"channel"`
 }
 
 func check(err error) {
@@ -145,17 +96,8 @@ func check(err error) {
 	}
 }
 
-func YoutubeDL(query string) bool {
+func YoutubeDL(query string) error {
 	cmd := `yt-dlp "ytsearch:`+query+`" --format bestaudio --output "music/%(title)s.%(ext)s"`
-	var stdout bytes.Buffer
-	var stderr bytes.Buffer
 	proc := exec.Command("bash", "-c", cmd)
-	proc.Stdout = &stdout
-	proc.Stderr = &stderr
-	err := proc.Run()
-	check(err)
-        if err != nil {
-return true
-} 
-return false
+	return proc.Run()
 }
