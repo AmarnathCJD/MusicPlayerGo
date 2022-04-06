@@ -149,7 +149,7 @@ func YoutubeDL(query string) bool {
 	fmt.Println(cmd)
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
-	proc := exec.Command("cmd", cmd)
+	proc := exec.Command("bash", "-c", cmd)
 	proc.Stdout = &stdout
 	proc.Stderr = &stderr
 	err := proc.Run()
