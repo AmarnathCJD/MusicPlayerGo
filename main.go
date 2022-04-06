@@ -146,8 +146,6 @@ func check(err error) {
 }
 
 func YoutubeDL(query string) bool {
-	wd, _ := os.Getwd()
-	path := filepath.Join(wd, "music")
 	cmd := `yt-dlp "ytsearch:`+query+`" --format bestaudio --output "music/%(title)s.%(ext)s"`
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
