@@ -142,18 +142,20 @@ func check(err error) {
 	}
 }
 
-func YoutubeDL(query string) {
+func YoutubeDL(query string) bool {
 	wd, _ := os.Getwd()
 	path := filepath.Join(wd, "music")
 	cmd := `yt-dlp ` + query + ` --output "` + path + `/%(title)s.%(ext)s" --default-search "ytsearch" --list-formats`
 	fmt.Println(cmd)
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
-	x, _ := exec.Command("cmd", "/C", cmd).Output()
-	fmt.Println(string(x))
 	proc := exec.Command("cmd", cmd)
 	proc.Stdout = &stdout
 	proc.Stderr = &stderr
 	err := proc.Run()
 	check(err)
+        if err != nil {
+return true
+} 
+return false
 }
