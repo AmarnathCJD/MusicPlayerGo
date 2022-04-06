@@ -96,7 +96,7 @@ func XD(w http.ResponseWriter, r *http.Request) {
 }
 
 func DownloadSong(q string) {
-        YouTubeDL(q)
+        YoutubeDL(q)
 	result := SearchVideos(q, 1)
 	Result := result[0]
 	youtube := youtube.Client{}
