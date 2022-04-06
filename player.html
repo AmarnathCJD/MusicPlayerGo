@@ -158,6 +158,7 @@
           data: { search: search },
           dataType: "json",
           success: function (data) {
+            listFile(data);
             fetch(root + "search", {
               method: "GET",
               body: JSON.stringify(data),
