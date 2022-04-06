@@ -158,7 +158,6 @@
           data: { search: search },
           dataType: "json",
           success: function (data) {
-            init();
             fetch(root + "search", {
               method: "GET",
               body: JSON.stringify(data),
@@ -166,9 +165,8 @@
                 "Content-Type": "application/json",
               },
             });
+            init();
             console.log("Hello!");
-            listFile(data);
-            console.log(data);
           },
         });
       }
