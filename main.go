@@ -97,6 +97,7 @@ func XD(w http.ResponseWriter, r *http.Request) {
 
 func DownloadSong(q string) {
         YoutubeDL(q)
+        return
 	result := SearchVideos(q, 1)
 	Result := result[0]
 	youtube := youtube.Client{}
@@ -147,7 +148,7 @@ func check(err error) {
 func YoutubeDL(query string) bool {
 	wd, _ := os.Getwd()
 	path := filepath.Join(wd, "music")
-	cmd := `yt-dlp ` + query + ` --output "` + path + `/%(title)s.%(ext)s" --default-search "ytsearch"`
+	cmd := `yt-dlp "ytsearch:`+query+`" --format bestaudio --output "music/%(title)s.%(ext)s"`
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
 	proc := exec.Command("bash", "-c", cmd)
