@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 	"os"
 	"os/exec"
@@ -86,7 +85,7 @@ func serveDir(w http.ResponseWriter, r *http.Request, path string) {
 func DownloadRequest(w http.ResponseWriter, r *http.Request) {
 	query := r.FormValue("search")
 	err := YoutubeDL(query)
-        check(err)
+	check(err)
 	w.WriteHeader(http.StatusOK)
 }
 
@@ -97,7 +96,7 @@ func check(err error) {
 }
 
 func YoutubeDL(query string) error {
-	cmd := `yt-dlp "ytsearch:`+query+`" --format bestaudio --output "music/%(title)s.%(ext)s"`
+	cmd := `yt-dlp "ytsearch:` + query + `" --format bestaudio --output "music/%(title)s.%(ext)s"`
 	proc := exec.Command("bash", "-c", cmd)
 	return proc.Run()
 }
