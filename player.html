@@ -29,7 +29,7 @@
 
       #btn {
         border-radius: 10px;
-        width: 296px;
+        width: 200px;
         margin-left: 1px;
         margin-top: 5px;
         height: 50px;
@@ -72,7 +72,7 @@
 
       input[type="text"],
       select {
-        width: 296px;
+        width: 200px;
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
@@ -86,12 +86,14 @@
       }
 
       input[type="submit"] {
-        width: 296px;
+        width: 200px;
         background-color: #613eb3;
         color: white;
         padding: 14px 20px;
         margin: 8px 0;
         border: none;
+        overflow: auto;
+        height: auto;
         border-radius: 4px;
         cursor: pointer;
       }
@@ -102,130 +104,129 @@
         border: 3px solid green;
         padding: 10px;
       }
-body {
-  margin: 0;
-  font: normal 75% Arial, Helvetica, sans-serif;
-}
-canvas {
-  display: block;
-  vertical-align: bottom;
-} /* ---- particles.js container ---- */
-#particles-js {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #000000;
-  background-image: url("https://telegra.ph//file/d3160d0c075a90a0c8738.jpg");
-  background-repeat: no-repeat;
-  background-size: 30%;
-  background-position: 50% 50%;
-} /* ---- stats.js ---- */
-.count-particles {
-  background: #000022;
-  position: absolute;
-  top: 48px;
-  left: 0;
-  width: 80px;
-  color: #13e8e9;
-  font-size: 0.8em;
-  text-align: left;
-  text-indent: 4px;
-  line-height: 14px;
-  padding-bottom: 2px;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: bold;
-}
-.js-count-particles {
-  font-size: 1.1em;
-}
-#stats,
-.count-particles {
-  -webkit-user-select: none;
-  margin-top: 5px;
-  margin-left: 5px;
-}
-#stats {
-  border-radius: 3px 3px 0 0;
-  overflow: hidden;
-}
-.count-particles {
-  border-radius: 0 0 3px 3px;
-}
+      body {
+        margin: 0;
+        font: 19px / 23px Montserrat, "Montserrat", sans-serif;
+        font-family: Verdana;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-image: url("https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=AcLSFNivGXo5DnoPqAdVxHB7qQrUvxjgXxmrGhEFH6v4&auto=format&fit=crop&w=1170&q=80");
+      }
+      * {
+        box-sizing: border-box;
+      }
+
+      .player {
+        width: 800px;
+        height: 529px;
+        background: #6b6d83;
+        box-shadow: 0px 24px 54px -12px #5e6178;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-400px);
+        top: 20%;
+      }
+      .player .cover {
+        width: 230px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-115px);
+        top: -40px;
+        box-shadow: 5px 20px 50px 0px rgba(17, 17, 17, 0.4);
+      }
+      .player .icons {
+        position: absolute;
+        right: 40px;
+        top: 40px;
+      }
+      .player .icons .fa {
+        color: #72e6cf;
+        margin-left: 15px;
+        font-size: 20px;
+      }
+      .player .info {
+        position: absolute;
+        top: 240px;
+        left: 20%;
+        color: #fff;
+        font-family: Open Sans;
+        letter-spacing: 1px;
+      }
+      .player .info .title {
+        font-size: 2em;
+        margin: 0;
+      }
+      .player .info .artist {
+        color: #bdbdbd;
+      }
+      .player .line {
+        height: 3px;
+        width: 100%;
+        background-color: #525363;
+        position: absolute;
+        top: 400px;
+      }
+      .player .playtime {
+        background-color: rgba(114, 230, 207, 0.3);
+        height: 5px;
+        width: 100%;
+        position: absolute;
+        bottom: 0px;
+      }
+      .player .played {
+        background-color: #72e6cf;
+        height: 5px;
+        width: 300px;
+        position: absolute;
+        bottom: 0px;
+      }
+      .player svg {
+        width: 85px;
+        background-color: #fff;
+        border-radius: 50%;
+        height: 85px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-42.5px);
+        bottom: 25px;
+        box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.4);
+      }
+      .player .forward {
+        width: 30px;
+        position: absolute;
+        bottom: 55px;
+        right: -70%;
+      }
+      .player .backward {
+        width: 30px;
+        position: absolute;
+        bottom: 55px;
+        left: 36%;
+      }
+      .player .fa.fa-volume-up {
+        color: #fff;
+        position: absolute;
+        bottom: 53px;
+        right: 28%;
+      }
+      .player p.songtime {
+        color: #fff;
+        position: absolute;
+        right: 20px;
+        bottom: 45px;
+      }
+      .player p.timeleft {
+        color: #fff;
+        position: absolute;
+        left: 20px;
+        bottom: 45px;
+      }
+      .player .fa.fa-heart.liked {
+        color: #ff749f;
+      }
     </style>
     <script src="http://www.google.com/jsapi" type="text/javascript"></script>
     <script type="text/javascript">
-      particlesJS("particles-js", {
-  particles: {
-    number: { value: 160, density: { enable: true, value_area: 800 } },
-    color: { value: "#f21515" },
-    shape: {
-      type: "star",
-      stroke: { width: 0, color: "#000000" },
-      polygon: { nb_sides: 5 },
-      image: { src: "img/github.svg", width: 100, height: 100 }
-    },
-    opacity: {
-      value: 1,
-      random: true,
-      anim: { enable: true, speed: 1, opacity_min: 0, sync: false }
-    },
-    size: {
-      value: 3,
-      random: true,
-      anim: { enable: false, speed: 4, size_min: 0.3, sync: false }
-    },
-    line_linked: {
-      enable: false,
-      distance: 150,
-      color: "#ffffff",
-      opacity: 0.4,
-      width: 1
-    },
-    move: {
-      enable: true,
-      speed: 1,
-      direction: "none",
-      random: true,
-      straight: false,
-      out_mode: "out",
-      bounce: false,
-      attract: { enable: true, rotateX: 600, rotateY: 600 }
-    }
-  },
-  interactivity: {
-    detect_on: "canvas",
-    events: {
-      onhover: { enable: true, mode: "grab" },
-      onclick: { enable: true, mode: "push" },
-      resize: true
-    },
-    modes: {
-      grab: { distance: 231.44200550588337, line_linked: { opacity: 1 } },
-      bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
-      repulse: { distance: 400, duration: 0.4 },
-      push: { particles_nb: 4 },
-      remove: { particles_nb: 2 }
-    }
-  },
-  retina_detect: true
-});
-var count_particles, stats, update;
-stats = new Stats();
-stats.setMode(0);
-stats.domElement.style.position = "absolute";
-stats.domElement.style.left = "0px";
-stats.domElement.style.top = "0px";
-document.body.appendChild(stats.domElement);
-count_particles = document.querySelector(".js-count-particles");
-update = function () {
-  stats.begin();
-  stats.end();
-  if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
-    count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
-  }
-  requestAnimationFrame(update);
-};
-requestAnimationFrame(update);
       var root = "/music/";
       var path = [];
 
@@ -273,6 +274,8 @@ requestAnimationFrame(update);
         $(e.target).addClass("playing");
         $("#player").attr("src", url);
         $("#player").play();
+        $(".player .info").text(name);
+        document.getElementById("title").text = name;
       }
 
       function next() {
@@ -318,7 +321,6 @@ requestAnimationFrame(update);
       google.setOnLoadCallback(init);
     </script>
   </head>
-
   <body>
     <audio id="player" controls autoplay autobuffer>
       <p>What? Your browser doesn't support</p>
@@ -327,9 +329,5 @@ requestAnimationFrame(update);
     <input type="text" id="search" placeholder="Search Songs" />
     <input type="submit" value="Search" onclick="search(this)" />
     <button id="btn" title="skip this song!">Skip</button>
-    <div id="particles-js"></div> <!-- stats - count particles -->
-<div class="count-particles"> <span class="js-count-particles">--</span> particles </div> <!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
-<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib -->
-<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
   </body>
 </html>

@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"os/exec"
 	"path/filepath"
 )
 
@@ -26,7 +25,7 @@ func main() {
 	http.HandleFunc("/", playerMainFrame)
 	http.HandleFunc(filePrefix, File)
 	http.HandleFunc("/music/search", DownloadRequest)
-	http.ListenAndServe(":"+PORT, nil)
+	http.ListenAndServe(":8080", nil)
 }
 
 func playerMainFrame(w http.ResponseWriter, r *http.Request) {
@@ -80,23 +79,4 @@ func serveDir(w http.ResponseWriter, r *http.Request, path string) {
 	if err := j.Encode(&fileinfos); err != nil {
 		panic(err)
 	}
-}
-
-func DownloadRequest(w http.ResponseWriter, r *http.Request) {
-	query := r.FormValue("search")
-	err := YoutubeDL(query)
-	check(err)
-	w.WriteHeader(http.StatusOK)
-}
-
-func check(err error) {
-	if err != nil {
-		fmt.Println(err)
-	}
-}
-
-func YoutubeDL(query string) error {
-	cmd := `yt-dlp "ytsearch:` + query + `" --format bestaudio --output "music/%(title)s.%(ext)s"`
-	proc := exec.Command("bash", "-c", cmd)
-	return proc.Run()
 }
