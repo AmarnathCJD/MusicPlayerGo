@@ -23,9 +23,3 @@ func YoutubeDL(query string) error {
 	proc := exec.Command("bash", "-c", cmd)
 	return proc.Run()
 }
-
-func check(err error) {
-	if err != nil {
-		fmt.Println(err)
-	}
-}
