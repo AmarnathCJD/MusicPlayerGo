@@ -25,7 +25,7 @@ func main() {
 	http.HandleFunc("/", playerMainFrame)
 	http.HandleFunc(filePrefix, File)
 	http.HandleFunc("/music/search", DownloadRequest)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+PORT, nil)
 }
 
 func playerMainFrame(w http.ResponseWriter, r *http.Request) {
