@@ -39,7 +39,7 @@ func SearchRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func YoutubeDL(query string) error {
-	proc, err, a := Bash([]string{"yt-dlp", "ytsearch:" + query, "--format", "bestaudio", "--output", "music/%(title)s.%(ext)s", "--write-info-json", "--write-thumbnail"})
+	proc, err, a := Bash([]string{"yt-dlp", "ytsearch:" + query, "--format", "bestaudio", "--output", "music/%(title)s.%(ext)s"})
 	fmt.Println(proc, err)
 	return a
 }

@@ -264,8 +264,8 @@
           dataType: "json",
           success: function (data) {
             httpGet(root + "search/" + search);
-            init();
             console.log("Hello!");
+            init();
           },
         });
       }
@@ -299,6 +299,7 @@
     <div id="playlist" class="center">Playlist</div>
     <input type="text" id="search" placeholder="Search Songs" />
     <input type="submit" value="Search" onclick="search(this)" />
+    <input type="submit" value="Download" onclick="download(this)" />
     <button id="btn" title="skip this song!">SKIP</button>
     <img src="" , class="img" , alt="soon" id="test-p" />
     <div id="myModal" class="modal">
