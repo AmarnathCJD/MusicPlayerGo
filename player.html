@@ -7,23 +7,19 @@
       type="image/x-icon"
       href="https://img.icons8.com/fluency/96/000000/music-heart.png"
     />
-    <link
-      rel="stylesheet"
-      hrefhref="https://open.scdn.co/cdn/build/mwp/mwp.8fda9db4.css"
-    />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <style>
       body {
         font-family: sans-serif，Verdana, Arial, Helvetica;
-        font-size: 10pt;
+        font-size: 5pt;
       }
 
       #playlist {
-        border-radius: 10px;
+        border-radius: 3px;
         padding: 5px 5px 3px 5px;
-        width: 290px;
-        margin-left: 1px;
-        margin-top: 10px;
-        height: 500px;
+        position: fixed;
+        top: 20%;
+        left: 68%;
         overflow: auto;
       }
 
@@ -46,10 +42,11 @@
         border-radius: 5px;
         overflow: hidden;
         margin-bottom: 2px;
+        color: #d8d8d8;
       }
 
       #playlist a.file {
-        background: #b4247d;
+        background: #121212;
       }
 
       #playlist {
@@ -67,7 +64,7 @@
       }
 
       #playlist a:hover {
-        background: #eec900;
+        background: #5a5a5a;
       }
 
       input[type="text"],
@@ -100,129 +97,95 @@
 
       .center {
         margin: auto;
-        width: 50%;
+        width: 30%;
         border: 3px solid green;
         padding: 10px;
       }
       body {
         margin: 0;
-        font: 19px / 23px Montserrat, "Montserrat", sans-serif;
+        font: 14px / 23px Montserrat, "Montserrat", sans-serif;
         font-family: Verdana;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         background-image: url("https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=AcLSFNivGXo5DnoPqAdVxHB7qQrUvxjgXxmrGhEFH6v4&auto=format&fit=crop&w=1170&q=80");
       }
-      * {
-        box-sizing: border-box;
+      img {
+        border: 1px solid #ddd;
+        padding: 5px;
+        width: 250px;
+        position: fixed;
+        top: 20%;
+        left: 26%;
+        transition: 0.3s;
+        border-radius: 5px;
+        cursor: pointer;
       }
 
-      .player {
-        width: 800px;
-        height: 529px;
-        background: #6b6d83;
-        box-shadow: 0px 24px 54px -12px #5e6178;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-400px);
-        top: 20%;
+      img:hover {
+        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
       }
-      .player .cover {
-        width: 230px;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-115px);
-        top: -40px;
-        box-shadow: 5px 20px 50px 0px rgba(17, 17, 17, 0.4);
+      img:hover {
+        opacity: 0.7;
       }
-      .player .icons {
-        position: absolute;
-        right: 40px;
-        top: 40px;
+      img[src=""] {
+        display: none;
       }
-      .player .icons .fa {
-        color: #72e6cf;
-        margin-left: 15px;
-        font-size: 20px;
-      }
-      .player .info {
-        position: absolute;
-        top: 240px;
-        left: 20%;
-        color: #fff;
-        font-family: Open Sans;
-        letter-spacing: 1px;
-      }
-      .player .info .title {
-        font-size: 2em;
-        margin: 0;
-      }
-      .player .info .artist {
-        color: #bdbdbd;
-      }
-      .player .line {
-        height: 3px;
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
         width: 100%;
-        background-color: #525363;
-        position: absolute;
-        top: 400px;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.9);
       }
-      .player .playtime {
-        background-color: rgba(114, 230, 207, 0.3);
-        height: 5px;
-        width: 100%;
-        position: absolute;
-        bottom: 0px;
+      .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
       }
-      .player .played {
-        background-color: #72e6cf;
-        height: 5px;
-        width: 300px;
-        position: absolute;
-        bottom: 0px;
+      #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
       }
-      .player svg {
-        width: 85px;
-        background-color: #fff;
-        border-radius: 50%;
-        height: 85px;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-42.5px);
-        bottom: 25px;
-        box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.4);
+      .modal-content,
+      #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
       }
-      .player .forward {
-        width: 30px;
-        position: absolute;
-        bottom: 55px;
-        right: -70%;
+      @keyframes zoom {
+        from {
+          transform: scale(0.1);
+        }
+        to {
+          transform: scale(1);
+        }
       }
-      .player .backward {
-        width: 30px;
+      .close {
         position: absolute;
-        bottom: 55px;
-        left: 36%;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
       }
-      .player .fa.fa-volume-up {
-        color: #fff;
-        position: absolute;
-        bottom: 53px;
-        right: 28%;
-      }
-      .player p.songtime {
-        color: #fff;
-        position: absolute;
-        right: 20px;
-        bottom: 45px;
-      }
-      .player p.timeleft {
-        color: #fff;
-        position: absolute;
-        left: 20px;
-        bottom: 45px;
-      }
-      .player .fa.fa-heart.liked {
-        color: #ff749f;
+      .close:hover,
+      .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
       }
     </style>
     <script src="http://www.google.com/jsapi" type="text/javascript"></script>
@@ -249,14 +212,16 @@
 
       function listFile(files) {
         var $b = $("#playlist").empty();
-
+        var hq = 0;
         function addToList(i, f) {
-          if (f.Name[0] == "." || f.Name[0] == ":") return;
+          if (f.Name[0] == "." || f.Name[0] == ":" || f.Name.includes("json"))
+            return;
+          hq += 1;
           var dir = f.IsDir;
           if (dir) return;
           f.Path = path.join("/");
           $("<a></a>")
-            .text(f.Name)
+            .text(hq + ". " + f.Name)
             .data("file", f)
             .addClass("file")
             .appendTo($b)
@@ -273,9 +238,6 @@
         $("#playlist a").removeClass("playing");
         $(e.target).addClass("playing");
         $("#player").attr("src", url);
-        $("#player").play();
-        $(".player .info").text(name);
-        document.getElementById("title").text = name;
       }
 
       function next() {
@@ -290,11 +252,7 @@
         return xmlHttp.response;
       }
 
-      function sleep(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-      }
-
-      function search(e) {
+      function download(e) {
         var $form = $(e.target);
         var $input = $form.find("input[id=search]");
         var search = $input.val();
@@ -305,15 +263,28 @@
           },
           dataType: "json",
           success: function (data) {
-            fetch(root + "search", {
-              method: "GET",
-              body: JSON.stringify(data),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            });
+            httpGet(root + "search/" + search);
             init();
             console.log("Hello!");
+          },
+        });
+      }
+      function search(e) {
+        var $form = $(e.target);
+        var $input = $form.find("input[id=search]");
+        var search = $input.val();
+        $.ajax({
+          success: function (data) {
+            resp = httpGet(root + "ytsearch?search=" + search);
+            const data2 = JSON.parse(resp);
+            $("#test-p").attr("src", data2.thumbnail);
+            $("#test-p").attr("alt", data2.title);
+            const wrap = (s, w) =>
+              s.replace(
+                new RegExp(`(?![^\\n]{1,${w}}$)([^\\n]{1,${w}})\\s`, "g"),
+                "$1\n"
+              );
+            $("#img-title").text(wrap(data2.title, 10));
           },
         });
       }
@@ -322,12 +293,33 @@
     </script>
   </head>
   <body>
-    <audio id="player" controls autoplay autobuffer>
+    <audio id="player" controls autoplay autobuffer class="center">
       <p>What? Your browser doesn't support</p>
     </audio>
-    <div id="playlist" class="center"></div>
+    <div id="playlist" class="center">Playlist</div>
     <input type="text" id="search" placeholder="Search Songs" />
     <input type="submit" value="Search" onclick="search(this)" />
-    <button id="btn" title="skip this song!">Skip</button>
+    <button id="btn" title="skip this song!">SKIP</button>
+    <img src="" , class="img" , alt="soon" id="test-p" />
+    <div id="myModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="img01" />
+      <div id="caption"></div>
+    </div>
+    <script type="text/javascript">
+      var modal = document.getElementById("myModal");
+      var img = document.getElementById("test-p");
+      var modalImg = document.getElementById("img01");
+      var captionText = document.getElementById("caption");
+      img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+      };
+      var span = document.getElementsByClassName("close")[0];
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+    </script>
   </body>
 </html>

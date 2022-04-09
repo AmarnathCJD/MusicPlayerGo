@@ -22,9 +22,13 @@ const (
 var PORT = os.Getenv("PORT")
 
 func main() {
+	if PORT == "" {
+		PORT = "8080"
+	}
 	http.HandleFunc("/", playerMainFrame)
 	http.HandleFunc(filePrefix, File)
 	http.HandleFunc("/music/search", DownloadRequest)
+	http.HandleFunc("/music/ytsearch", SearchRequest)
 	http.ListenAndServe(":"+PORT, nil)
 }
 
